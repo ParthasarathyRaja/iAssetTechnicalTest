@@ -158,6 +158,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\iassetdotcom_reg_230x38.png" />
     <Content Include="Scripts\App\weather.js" />
     <Content Include="Scripts\App\main.js" />
     <Content Include="Content\bootstrap.css" />

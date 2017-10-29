@@ -78,6 +78,7 @@ mainApp.service('WeatherService', function (ClimateService) {
 mainApp.controller('WeatherController', function ($scope, $http, WeatherService) {
 
     $scope.getWeather = function () {
+        $scope.error = " ";
         //$scope.result = CalcService.square($scope.city, $scope.country);
         debugger;
         $http.get("/Home/GetWeather", { params: { city: $scope.selectedCity.City, country: $scope.country } })
@@ -121,6 +122,7 @@ mainApp.controller('WeatherController', function ($scope, $http, WeatherService)
 
     }
     $scope.getCities = function () {
+        $scope.error = " ";
         debugger;
         console.log("get cities called");
 

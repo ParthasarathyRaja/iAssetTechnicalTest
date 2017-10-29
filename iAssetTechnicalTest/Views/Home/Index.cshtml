@@ -5,35 +5,62 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
 <script src="~/Scripts/App/weather.js"></script>
 <link href="~/Content/Site.css" rel="stylesheet" />
+<style>
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+</style>
 
 
 <div ng-app="mainApp" ng-controller="WeatherController">
     <div ng-view></div>
-    <h3>iAsset Weather</h3>
+    <div><img src="~/Images/iassetdotcom_reg_230x38.png" /></div>
     <scan style="color:red">{{error}}</scan>
     <p>
         <table style="width:80%;" id="rcorners1">
             <tr>
-                <td>
+                <td width="25%">
                     <input type="text" ng-model="country" placeholder="Enter a country name" />
                 </td>
-                <td><button class="myButton" ng-click="getCities()">Search Cities</button></td>
-                <td>
+                <td width="25%"><button class="myButton" ng-click="getCities()">Search Cities</button></td>
+                <td width="25%">
                     <select ng-model="selectedCity" ng-options="b.City for b in Citylist">
                         <option value="">-- Select a city --</option>
                     </select>
                 </td>
-                <td>
+                <td width="25%">
                     <button class="myButton" ng-click="getWeather()">Get Weather</button>
                 </td>
             </tr>
         </table>
     </p>
-    <br />
-    <h3>Weather Report</h3>
-    <table style="width:100%;">
+    <h3><span style="color:#000080;"> Weather Report</span></h3>
+    <table id="customers" style="color:#000080; width:80%">
         <tr>
-            <td>Location</td>
+            <td width="25%">Location</td>
             <td>{{location}}</td>
         </tr>
         <tr>
@@ -70,7 +97,6 @@
         </tr>
     </table>
     <br />
-    <br />
-    <span>Note: Please click here to compare the values:  <a href='{{urlused}}' target="_blank">{{urlused}}</a></span>
+    <span style="color:#000080;">Note: Please click here to compare the values:  <a href='{{urlused}}' target="_blank">{{urlused}}</a></span>
     <br />
 </div>
