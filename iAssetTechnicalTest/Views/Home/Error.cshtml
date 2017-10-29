@@ -1,0 +1,18 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+@if(ViewBag.Message == null)
+{
+<h2>
+    There is a problem with your recent action. The most probable reason is, either there is an exception with the application or
+    the URL of the page you are trying to view is incorrect.
+    Please retry or contact your administrator.
+</h2>
+}
+else
+{   <h2>
+     @ViewBag.Message
+    </h2>
+}

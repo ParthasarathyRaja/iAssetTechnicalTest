@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
+﻿using iAssetTechnicalTest.Controllers;
+using iAssetTechnicalTest.Repository;
+using iAssetTechnicalTest.Tests.GlobalWeatherTest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using iAssetTechnicalTest;
-using iAssetTechnicalTest.Controllers;
+using Newtonsoft.Json;
+using System.Web.Mvc;
+using System.Xml;
 
 namespace iAssetTechnicalTest.Tests.Controllers
 {
@@ -15,40 +14,72 @@ namespace iAssetTechnicalTest.Tests.Controllers
         [TestMethod]
         public void Index()
         {
-            // Arrange
-            HomeController controller = new HomeController();
+            //Create an instance for GlobalWeather. Use the service class straight and check the DI classes
+            IWeatherRepository weatherClient = new WeatherRepository();
+
+            //Arrange
+            HomeController controller = new HomeController(weatherClient);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
 
-            // Assert
+            // Assert - Test 1 - test view is not null.
             Assert.IsNotNull(result);
         }
 
         [TestMethod]
-        public void About()
+        public void GetCitiesByCountryTest()
         {
-            // Arrange
-            HomeController controller = new HomeController();
+            //Create an instance for GlobalWeather. Use the service class straight and check the DI classes
+            IWeatherRepository weatherClient = new WeatherRepository();
 
-            // Act
-            ViewResult result = controller.About() as ViewResult;
+            //Arrange
+            HomeController controller = new HomeController(weatherClient);
 
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            //Assert - Test 1 - test for not null return value when valid country name is passed
+            JsonResult result1 = controller.GetCitiesByCountry("Australia");
+            Assert.IsNotNull(result1);
+
+            //Assert - Test 2 - comaparison test for valid results of country
+            GlobalWeatherSoapClient weatherClientTest = new GlobalWeatherSoapClient();
+            string citiesList = weatherClientTest.GetCitiesByCountry("Australia");
+            var xml = new XmlDocument();
+            xml.LoadXml(citiesList);
+            string jsonString = JsonConvert.SerializeXmlNode(xml);
+
+            Assert.AreEqual(result1.Data, jsonString);
+
+            //Assert - Test 3 - test with wrong data. pass city instead of country. make sure nothing breaks
+            JsonResult result2 = controller.GetCitiesByCountry("sydney");
+            Assert.IsNotNull(result2);
         }
 
         [TestMethod]
-        public void Contact()
+        public void GetWeatherTest()
         {
-            // Arrange
-            HomeController controller = new HomeController();
+            //Create an instance for GlobalWeather. Use the service class straight and check the DI classes
+            IWeatherRepository weatherClient = new WeatherRepository();
 
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
+            //Arrange
+            HomeController controller = new HomeController(weatherClient);
 
-            // Assert
-            Assert.IsNotNull(result);
+            //Assert - Test 1 - test for not null return value when valid country name is passed
+            JsonResult result1 = controller.GetWeather("Sydney Airport", "Australia");
+            Assert.IsNotNull(result1);
+
+            //Assert - Test 2 - comaparison test for valid results of country
+            GlobalWeatherSoapClient weatherClientTest = new GlobalWeatherSoapClient();
+            string citiesList = weatherClientTest.GetWeather("Sydney Airport", "Australia");
+            if (citiesList == "Data Not Found")
+            {
+                citiesList = "";
+            }
+            Assert.AreEqual(result1.Data, citiesList);
+
+            //Assert - Test 3 - test with wrong data. pass city instead of country. make sure nothing breaks
+            JsonResult result2 = controller.GetWeather("Australia", "Sydney Airport");
+            Assert.IsNotNull(result2);
         }
     }
+
 }

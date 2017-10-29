@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "iasset technical test";
+}
+<script src="~/Scripts/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
+<script src="~/Scripts/App/main1.js"></script>
+
+@*<div ng-app="myapp" ng-controller="WeatherController" class="jumbotron">
+        <div ng-view></div>
+        <h1>iAsset Weather Test</h1>
+        <p>Enter a country: <input type="text" ng-model="country" /></p>
+        <p>Enter a city: <input type="text" ng-model="city" /></p>
+        <button ng-click="getWeather()">Click</button>
+        <p>Result: <input type="text" ng-model="result" /></p>
+    </div>*@
+
+@*<div ng-app="mainApp" ng-controller="CalcController">
+        <p>Enter a number: <input type="number" ng-model="number" /></p>
+        <button ng-click="square()">X<sup>2</sup></button>
+        <p>Result: {{result}}</p>
+    </div>*@
+
+<div ng-app="mainApp" ng-controller="CalcController" class="jumbotron">
+    <div ng-view></div>
+    <h1>iAsset Weather Test</h1>
+    <p>Enter a country: <input type="text" ng-model="country" /></p>
+    <button ng-click="getCities()">City</button>
+    <p>
+        Selet a city:
+        <select ng-model="city" ng-options="b for b.city in list">
+            <option value="">-- Select a city --</option>
+        </select>
+    </p>
+    <p>Enter a city: <input type="text" ng-model="list" /></p>
+    
+    <button ng-click="getWeather()">Weather</button>
+    <p>Result: <input type="text" ng-model="result" /></p>
+</div>
