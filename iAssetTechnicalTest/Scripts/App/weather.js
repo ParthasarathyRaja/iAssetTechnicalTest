@@ -133,7 +133,13 @@ mainApp.controller('WeatherController', function ($scope, $http, WeatherService)
         .then(function (success) {
             debugger;
             data = success.data;
-            $scope.Citylist = JSON.parse(data).NewDataSet.Table;
+            if (JSON.parse(data).NewDataSet != null) {
+                $scope.Citylist = JSON.parse(data).NewDataSet.Table;
+            }
+            else {
+                $scope.error = "Could not found cities for " + $scope.country;
+            }
+            
         },
         function (error) {
             debugger;

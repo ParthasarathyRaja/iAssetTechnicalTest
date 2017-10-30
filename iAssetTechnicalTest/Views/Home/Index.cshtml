@@ -5,40 +5,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
 <script src="~/Scripts/App/weather.js"></script>
 <link href="~/Content/Site.css" rel="stylesheet" />
-<style>
-    #customers {
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-        #customers td, #customers th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        #customers tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        #customers tr:hover {
-            background-color: #ddd;
-        }
-
-        #customers th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #4CAF50;
-            color: white;
-        }
-</style>
-
 
 <div ng-app="mainApp" ng-controller="WeatherController">
     <div ng-view></div>
     <div><img src="~/Images/iassetdotcom_reg_230x38.png" /></div>
-    <scan style="color:red">{{error}}</scan>
     <p>
         <table style="width:80%;" id="rcorners1">
             <tr>
@@ -56,6 +26,7 @@
                 </td>
             </tr>
         </table>
+        <scan style="color:red">{{error}}</scan>
     </p>
     <h3><span style="color:#000080;"> Weather Report</span></h3>
     <table id="customers" style="color:#000080; width:80%">
