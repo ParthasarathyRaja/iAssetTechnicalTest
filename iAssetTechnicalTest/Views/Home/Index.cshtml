@@ -9,8 +9,8 @@
 <div ng-app="mainApp" ng-controller="WeatherController">
     <div ng-view></div>
     <div><img src="~/Images/iassetdotcom_reg_230x38.png" /></div>
-    <p>
-        <table style="width:80%;" id="rcorners1">
+    <div id="rcorners1" style="width:80%;" >
+        <table style="width:100%;" >
             <tr>
                 <td width="25%">
                     <input type="text" ng-model="country" placeholder="Enter a country name" />
@@ -26,8 +26,8 @@
                 </td>
             </tr>
         </table>
-        <scan style="color:red">{{error}}</scan>
-    </p>
+    </div>
+    <scan style="color:red">{{error}}</scan>
     <h3><span style="color:#000080;"> Weather Report</span></h3>
     <table id="customers" style="color:#000080; width:80%">
         <tr>
@@ -68,6 +68,7 @@
         </tr>
     </table>
     <br />
-    <span style="color:#000080;">Note: Please click here to compare the values:  <a href='{{urlused}}' target="_blank">{{urlused}}</a></span>
+    <span style="color:#000080;">Note: Please click here to compare the values:  <br />
+    <a href='{{urlused}}' target="_blank">{{urlused}}</a></span>
     <br />
 </div>

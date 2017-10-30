@@ -2,7 +2,7 @@
 var data = new Object();
 var apiKey = "4acf9196cb8f4acc39233be4fb93788b";
 
-//AngualrJs Dependency Injection : PROVIDER
+//AngularJs Dependency Injection : PROVIDER
 mainApp.config(function ($provide) {
     $provide.provider('ClimateService', function () {
         this.$get = function () {
@@ -37,7 +37,7 @@ mainApp.config(function ($provide) {
 //mainApp.value("defaultCity", "London");
 //mainApp.value("defaultCountry", "uk");
 
-//AngualrJs Dependency Injection : FACTORY
+//AngularJs Dependency Injection : FACTORY
 mainApp.factory('ClimateService', function () {
     var factory = {};
 
@@ -65,7 +65,7 @@ mainApp.factory('ClimateService', function () {
     return factory;
 });
 
-//AngualrJs Dependency Injection : SERVICE
+//AngularJs Dependency Injection : SERVICE
 mainApp.service('WeatherService', function (ClimateService) {
     this.square = function (a, b) {
         return ClimateService.multiply(a, b);
@@ -100,7 +100,7 @@ mainApp.controller('WeatherController', function ($scope, $http, WeatherService)
                         $scope.time = Date();
                         $scope.wind = "Speed: " + success.data.wind.speed + " m/s, Degree: " + success.data.wind.deg;
                         $scope.visibility = success.data.visibility;
-                        $scope.sky = success.data.weather[0].description;
+                        $scope.sky = success.data.weather != null ? success.data.weather[0].main + " - " + success.data.weather[0].description : "";
                         $scope.temparature = success.data.main.temp;
                         $scope.dewPoint = "-";
                         $scope.humidity = success.data.main.humidity + " %";
